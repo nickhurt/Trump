@@ -1,0 +1,73 @@
+package robot;
+
+import java.awt.Color;
+import kareltherobot.*;
+/*
+ * Trump will run in maze.kwld
+ * @author Trent Crow
+ * 
+ * 
+ */
+public class Trump extends AugmentedRobot
+{
+	
+	
+	public Trump(int street, int avenue, Directions.Direction direction, int beepers)
+	{
+		super(street, avenue, direction, beepers);
+		
+	}
+	
+	public void move()
+	{
+		//If there is a wall to your left, move forward
+		if(checkLeft() == true)
+			if(frontIsClear() == true)
+				super.move();
+			else
+				turnRight();
+		//Otherwise, turn left and move forward once before checking again
+		else
+		{
+			turnLeft();
+			if (frontIsClear() == true)
+				super.move();
+		}
+		
+	}
+	
+	/**
+	 * A shortcut method used to have the <code>StairsRobot</code> perform a 
+	 * right turn by making three left turns
+	 */
+	public void turnRight() 
+	{
+		turnLeft();
+		turnLeft();
+		turnLeft();
+	}
+	
+	/**
+	 * A shortcut method used to have the <code>StairsRobot</code> check if there is a wall 
+	 * present on the robot's left before returning to its original position
+	 * @return <b>true</b> if there is a wall present on the left; 
+	 * 			<b>false</b> if there is not a wall present
+	 */
+	public boolean checkLeft()
+	{
+		turnLeft();
+		/*
+		 * If there is a wall to you left, face back forward and return true. Otherwise, face back 
+		 * forward and return false
+		 */
+		if (frontIsClear() == false)
+		{
+			turnRight();
+			return true;
+		}
+		turnRight();
+		return false;
+	}
+	
+	
+}
