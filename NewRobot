@@ -1,0 +1,21 @@
+package robot;
+
+/**
+ * NewRobot.java: 
+ *
+ * <code>NewRobot</code> is an interface used to guide the creation of new Karel robots.
+ */
+public interface NewRobot {
+	
+	/**
+	 * A shortcut method used to have each new robot perform a right turn by making 
+	 * three left turns
+	 */
+	void turnRight();
+	
+	/**
+	 * Base method used to run each new robot.
+	 */
+	void move();
+
+}
