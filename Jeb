@@ -1,0 +1,88 @@
+package robot;
+
+import java.awt.Color;
+import kareltherobot.*;
+/*JebDaBush will tackle horizontal.kwld
+ * @author Trent Crow
+ */
+public class JebDaBush extends Robot
+{
+
+	public JebDaBush(int street, int avenue, Directions.Direction direction, int beepers) 
+	{
+		super(street, avenue, direction, beepers);
+
+		
+	} 
+	
+	//Shortcut so you wont have to turn left three times in move()
+	public void turnRight()
+	{
+		for (int t = 0; t < 3; t++)
+		{
+			super.turnLeft();
+		}
+	}
+	
+	//Checks to see if left side is clear or not
+	public boolean checkLeft()
+	{
+		super.turnLeft();
+		if (frontIsClear() == true)
+		{
+			turnRight();
+			return true;
+		}
+		else
+		{
+			turnRight();
+			return false;
+		}
+	}
+	
+	//Checks to see if right side is clear or not
+	public boolean checkRight()
+	{
+		turnRight();
+		if (frontIsClear() == true)
+		{
+			super.turnLeft();
+			return true;
+		}
+		else
+		{
+			turnLeft();
+			return false;
+		}
+	}
+	
+	//How Jeb will move
+	public void move()
+	{
+		//check left, if clear turn left and move up one
+		if (checkLeft() == true)
+		{
+			super.turnLeft();
+			super.move();
+		}
+		//if left is blocked check front, if clear move up one
+		else if (frontIsClear() == true)
+		{
+			super.move();
+		}
+		//if left and front is blocked, check right,if clear turn right and move up one
+		else if (checkRight() == true)
+		{
+			turnRight();
+			super.move();
+		}
+		//if all fails, face north and try again
+		else
+		{
+			if (facingNorth() == false)
+				super.turnLeft();
+		}
+	}
+
+}
+
