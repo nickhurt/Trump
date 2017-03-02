@@ -1,0 +1,32 @@
+package robot;
+
+import java.awt.Color;
+import kareltherobot.*;
+/*Crooked Cracker focuses on climbing stairs which she somehow accomplished
+ *author Trent Crow
+ * 
+ */
+public class HillaryChillingsworth extends UrRobot 
+{
+	
+
+	public HillaryChillingsworth(int street, int avenue, Directions.Direction direction, int beepers) 
+	{
+		super(street, avenue, direction, beepers);
+	}
+	
+	//Hillary will cycle through loop till she reaches top of stairs
+	public void move()
+	{
+		for(int s = 0; s < 8; s++)
+		{
+		super.move();
+		super.turnLeft();
+		super.turnLeft();
+		super.turnLeft();
+		super.move();
+		super.turnLeft();
+		}
+	}
+
+}
